@@ -36,47 +36,140 @@
 
 /* Estilos horizontales para las listas */
 .weather-container {
+    position: relative;
+    min-height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    text-align: center;
+    z-index: 1;
 
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
+    // Estilos para soleado
+    &.sunny {
+        background: linear-gradient(to bottom, #12a4f3, #0fa9f1);
+
+        // Sol animado
+        &::before {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #f1c40f 50%, #e67e22 100%);
+            border-radius: 50%;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(243, 156, 18, 0.7);
+            animation: rotateSun 20s infinite linear;
+            z-index: 0;
+        }
     }
 
-    /* Contenedor que alinea los elementos del forecast y el clima de forma horizontal */
-    .weather-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        margin-top: 20px;
-        width: 100%;
+
+    // Estilos específicos para cuando está nublado
+    &.cloudy {
+        background: linear-gradient(to bottom, #7f8c8d, #bdc3c7);
+
+        // Primera nube
+        &::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            top: 20px;
+            left: 50px;
+            box-shadow: -30px 20px 0 -10px #ecf0f1, 30px 20px 0 -10px #ecf0f1;
+        }
+
+        // Segunda nube
+        &::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            top: 60px;
+            right: 60px;
+            box-shadow: -40px 30px 0 -15px #ecf0f1, 40px 30px 0 -15px #ecf0f1;
+            animation: moveClouds 10s infinite linear;
+        }
+
+        // Estilos para tormentas (nubes con lluvia)
+        &.rainy {
+            background: linear-gradient(to bottom, #4b6584, #a5b1c2);
+
+            // Nube de tormenta
+            &::before {
+                content: "";
+                position: absolute;
+                width: 200px;
+                height: 100px;
+                background: #bdc3c7;
+                border-radius: 50%;
+                top: 20px;
+                left: 50px;
+                box-shadow: -40px 30px 0 -15px #bdc3c7, 40px 30px 0 -15px #bdc3c7;
+            }
+
+            // Lluvia
+            .rain {
+                position: absolute;
+                width: 2px;
+                height: 20px;
+                background: #3498db;
+                border-radius: 50%;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                animation: rainFall 1s infinite linear;
+            }
+
+            // Gotas de lluvia animadas
+            .rain:nth-child(1) {
+                left: 45%;
+                animation-delay: 0.1s;
+            }
+
+            .rain:nth-child(2) {
+                left: 50%;
+                animation-delay: 0.2s;
+            }
+
+            .rain:nth-child(3) {
+                left: 55%;
+                animation-delay: 0.3s;
+            }
+        }
+    }
+}
+
+// Animación para mover las nubes de izquierda a derecha
+@keyframes moveClouds {
+    0% {
+        transform: translateX(0);
     }
 
-    /* Cada item del forecast o clima actual */
-    .weather-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #f0f0f0;
-        padding: 15px;
-        margin: 10px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        width: 200px;
-        /* Ajusta el ancho según tu preferencia */
-        text-align: center;
+    100% {
+        transform: translateX(50px);
+    }
+}
 
-        h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
+// Animación de la lluvia
+@keyframes rainFall {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
 
-        p {
-            margin: 5px 0;
-        }
+    100% {
+        opacity: 1;
+        transform: translateY(100px);
     }
 }

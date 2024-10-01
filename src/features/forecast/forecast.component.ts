@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WeatherService } from '../../services/weather.service';
-import { WeatherModel, CurrentWeatherModel } from '../../models/weather.model';
+import { CurrentWeatherModel } from '../../models/weather.model';
 
 @Component({
   selector: 'app-forecast',
@@ -13,7 +13,6 @@ import { WeatherModel, CurrentWeatherModel } from '../../models/weather.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForecastComponent {
-  forecastData!: WeatherModel; 
   weatherData!: CurrentWeatherModel; 
   city: string = '';
   lat: number | null = null; 
@@ -42,27 +41,13 @@ export class ForecastComponent {
       default:
         return '';
     }
-  }  
-
-  getForecast() {
-    if (this.lat !== null && this.lon !== null) {
-      this.weatherService.getForecastByCoordinates(this.lat, this.lon).subscribe((data) => {
-        this.forecastData = data;
-        console.log('Forecast Data:', this.forecastData);
-      });
-    }
-  }
+  } 
 
   getCurrentWeather() {
     this.weatherService.getWeatherByCity(this.city).subscribe(
       (data) => {
         this.weatherData = data;
         console.log('Current Weather Data:', this.weatherData);
-
-        this.lat = data.coord.lat; 
-        this.lon = data.coord.lon; 
-
-        this.getForecast(); 
       },
       (error) => {
         console.error('Error fetching weather data', error);

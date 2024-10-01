@@ -54,14 +54,6 @@ export interface City {
     sunset: number;
 }
 
-export interface WeatherModel {
-    cod: string;
-    message: number;
-    cnt: number;
-    list: WeatherItem[];
-    name: City;
-}
-
 export interface CurrentWeatherModel {
     coord: {
         lat: number;
