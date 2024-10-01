@@ -100,52 +100,125 @@
             box-shadow: -40px 30px 0 -15px #ecf0f1, 40px 30px 0 -15px #ecf0f1;
             animation: moveClouds 10s infinite linear;
         }
+    }
 
-        // Estilos para tormentas (nubes con lluvia)
-        &.rainy {
-            background: linear-gradient(to bottom, #4b6584, #a5b1c2);
+    // Estilos para tormentas (nubes con lluvia)
+    &.rainy {
+        background: linear-gradient(to bottom, #4b6584, #a5b1c2);
 
-            // Nube de tormenta
-            &::before {
-                content: "";
-                position: absolute;
-                width: 200px;
-                height: 100px;
-                background: #bdc3c7;
-                border-radius: 50%;
-                top: 20px;
-                left: 50px;
-                box-shadow: -40px 30px 0 -15px #bdc3c7, 40px 30px 0 -15px #bdc3c7;
-            }
+        // Nube de tormenta
+        &::before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: #bdc3c7;
+            border-radius: 50%;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: -40px 30px 0 -15px #bdc3c7, 40px 30px 0 -15px #bdc3c7;
+        }
 
-            // Lluvia
-            .rain {
-                position: absolute;
-                width: 2px;
-                height: 20px;
-                background: #3498db;
-                border-radius: 50%;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                animation: rainFall 1s infinite linear;
-            }
+        // Lluvia
+        .rain {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: rainFall 1s infinite linear;
+        }
 
-            // Gotas de lluvia animadas
-            .rain:nth-child(1) {
-                left: 45%;
-                animation-delay: 0.1s;
-            }
+        // Varias gotas de lluvia animadas con diferentes posiciones y retrasos
+        .rain:nth-child(1) {
+            left: 44%;
+            animation-delay: 0.1s;
+        }
 
-            .rain:nth-child(2) {
-                left: 50%;
-                animation-delay: 0.2s;
-            }
+        .rain:nth-child(2) {
+            left: 45%;
+            animation-delay: 0.2s;
+        }
 
-            .rain:nth-child(3) {
-                left: 55%;
-                animation-delay: 0.3s;
-            }
+        .rain:nth-child(3) {
+            left: 46%;
+            animation-delay: 0.3s;
+        }
+
+        .rain:nth-child(4) {
+            left: 47%;
+            animation-delay: 0.4s;
+        }
+
+        .rain:nth-child(5) {
+            left: 48%;
+            animation-delay: 0.5s;
+        }
+
+        .rain:nth-child(6) {
+            left: 49%;
+            animation-delay: 0.1s;
+        }
+
+        .rain:nth-child(7) {
+            left: 50%;
+            animation-delay: 0.2s;
+        }
+
+        .rain:nth-child(8) {
+            left: 51%;
+            animation-delay: 0.3s;
+        }
+
+        .rain:nth-child(9) {
+            left: 52%;
+            animation-delay: 0.4s;
+        }
+
+        .rain:nth-child(10) {
+            left: 53%;
+            animation-delay: 0.5s;
+        }
+    }
+
+    // Estilos especificos para cuando hay nieve
+    &snowy {
+        background: linear-gradient(to bottom, #4b6584, #a5b1c2);
+
+        // Estilos para los copos de nieve
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowFall 5s linear infinite;
+        }
+
+        // Varias posiciones para los copos de nieve
+        .snowflake:nth-child(1) {
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .snowflake:nth-child(2) {
+            left: 40%;
+            animation-delay: 1s;
+        }
+
+        .snowflake:nth-child(3) {
+            left: 60%;
+            animation-delay: 2s;
+        }
+
+        .snowflake:nth-child(4) {
+            left: 80%;
+            animation-delay: 3s;
         }
     }
 }
@@ -165,11 +238,28 @@
 @keyframes rainFall {
     0% {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(-300px);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(100px);
+        transform: translateY(0px);
+    }
+}
+
+// Animación para los copos de nieve
+@keyframes snowFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);   // Comienza fuera del contenedor
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(400px) rotate(360deg);  // Cae y rota mientras baja
+        opacity: 0;
     }
 }
