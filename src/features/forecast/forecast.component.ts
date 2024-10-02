@@ -20,10 +20,6 @@ export class ForecastComponent {
 
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit() {
-    // Ya no es necesario inicializar el clima al inicio
-  }
-
   getWeatherClass() {
     if (!this.weatherData || !this.weatherData.weather[0]) {
       return '';
