@@ -47,11 +47,10 @@ export class ForecastComponent {
     this.weatherService.getWeatherByCity(this.city).subscribe(
       (data) => {
         this.weatherData = data;
-        console.log('Current Weather Data:', this.weatherData);
       },
       (error) => {
         console.error('Error fetching weather data', error);
-        alert('City not found. Please try again.');
+        alert('Ciudad no encontrada. Por favor intentelo de nuevo.');
       }
     );
   }
